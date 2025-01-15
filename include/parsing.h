@@ -6,7 +6,7 @@
 /*   By: ngoulios <ngoulios@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:17 by ngoulios          #+#    #+#             */
-/*   Updated: 2025/01/14 21:47:02 by ngoulios         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:43:22 by ngoulios         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /*Provides functions for reading and editing user input from the command line, 
 with features like line editing, auto-completion, and custom keybindings. 

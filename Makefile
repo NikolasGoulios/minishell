@@ -6,32 +6,30 @@
 #    By: ngoulios <ngoulios@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 21:35:43 by ngoulios          #+#    #+#              #
-#    Updated: 2025/01/14 21:54:06 by ngoulios         ###   ########.fr        #
+#    Updated: 2025/01/15 11:42:16 by ngoulios         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = cc 
-FLAGS = -Wall -Werror -Wextra
+CC = cc
+FLAGS = -Wall -Werror -Wextra -I/usr/local/include
 
 SRC = main.c
-
 OBJECTS = $(SRC:.c=.o)
 
-%.o: %.c 
-	$(CC) $(FLAGS) -I. -o $@ -c $<
+%.o: %.c
+	$(CC) $(FLAGS) -o $@ -c $<
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -rcs lib$(NAME).a $(OBJECTS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJECTS)
+	$(CC) $(FLAGS) -L/usr/local/lib -lreadline -o $(NAME) $(OBJECTS)
 
 clean:
-		rm -f $(OBJECTS)
+	rm -f $(OBJECTS)
 
 fclean: clean
-		rm -f $(NAME) lib$(NAME).a
+	rm -f $(NAME)
 
 re: fclean all
 
