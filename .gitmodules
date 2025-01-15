@@ -1,0 +1,3 @@
+[submodule "lib/RevisedLibft"]
+	path = lib/RevisedLibft
+	url = git@github.com:NikolasGoulios/RevisedLibft.git
