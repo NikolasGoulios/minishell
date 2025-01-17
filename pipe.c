@@ -55,7 +55,7 @@ static void	ft_child_process(int *prev_pipe, int *next_pipe, char *cmd, char **e
 	ft_command(envp, cmd); //execute command
 }
 
-static void	ft_pipe(int num_cmds, char **cmds, char **envp)
+void	ft_pipe(int num_cmds, char **cmds, char **envp)
 {
 	int		pipe_fd[num_cmds - 1][2];
 	int		i;
