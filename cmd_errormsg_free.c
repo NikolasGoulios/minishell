@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipe_utils2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ssalorin <ssalorin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 15:37:31 by ssalorin          #+#    #+#             */
-/*   Updated: 2025/01/15 15:39:39 by ssalorin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "seela.h"
 
 void	ft_free_array(char **array)
@@ -34,11 +22,11 @@ void	ft_print_err(char *cmd, int c)
 	err_msg = "zsh: ";
     err_out = NULL;
 	if (cmd[0] == '/' || c == 2)
-		err_out = ft_strjoin(err_msg, "No such file or directory :");
+		err_out = ft_strjoin(err_msg, "No such file or directory: ");
 	else if (cmd[0] == '.')
-		err_out = ft_strjoin(err_msg, "Permission denied :");
+		err_out = ft_strjoin(err_msg, "Permission denied: ");
 	else
-		err_out = ft_strjoin(err_msg, "command not found :");
+		err_out = ft_strjoin(err_msg, "command not found: ");
     if (!err_out)
         exit(1);
 	temp = ft_strjoin(err_out, cmd);
