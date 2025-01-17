@@ -106,7 +106,7 @@ static void	ft_check_dir(char *cmd)
 	char	*err_out;
 	char	*err_temp;
 
-	err_msg = "./pipex: ";
+	err_msg = "zsh: ";
 	len = ft_strlen(cmd) - 1;
 	if (cmd[0] == '.' && cmd[len] == '/')
 	{
