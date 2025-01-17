@@ -60,8 +60,14 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
 	int		pipe_fd[num_cmds - 1][2];
 	int		i;
 	pid_t	pid;
+    pid_t   last_pid;
+    pid_t   wpid;
+    int     status;
+    int     exit_status;
 
-	i = 0;
+    i = 0;
+    last_pid = -1;
+	exit_status = 0;
 	while (i < num_cmds)
 	{
 		if (i < num_cmds - 1)
@@ -86,6 +92,7 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
 			close(pipe_fd[i - 1][0]);
 			close(pipe_fd[i - 1][1]);
 		}
+        last_pid = pid;
 		i++;
 	}
 	i = 0;
@@ -96,9 +103,14 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
 		i++;
 	}
 	i = 0;
-	while (i < num_cmds - 1)
+	while (i < num_cmds)
 	{
-		wait(NULL);
+        wpid = wait(&status);
+		if (wpid == last_pid && WIFEXITED(status))
+        {
+            exit_status = WEXITSTATUS(status);
+            exit(exit_status);
+        }
 		i++;
 	}
 }
