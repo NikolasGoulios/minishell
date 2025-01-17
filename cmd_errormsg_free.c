@@ -31,17 +31,23 @@ void	ft_print_err(char *cmd, int c)
 	char	*err_out;
 	char	*temp;
 
-	err_msg = "./pipex: ";
-	err_out = ft_strjoin(err_msg, cmd);
+	err_msg = "zsh: ";
+    err_out = NULL;
 	if (cmd[0] == '/' || c == 2)
-		temp = ft_strjoin(err_out, ": No such file or directory\n");
+		err_out = ft_strjoin(err_msg, "No such file or directory :");
 	else if (cmd[0] == '.')
-		temp = ft_strjoin(err_out, ": Permission denied\n");
+		err_out = ft_strjoin(err_msg, "Permission denied :");
 	else
-		temp = ft_strjoin(err_out, ": command not found\n");
-	free(err_out);
-	err_out = temp;
-	if (err_out)
+		err_out = ft_strjoin(err_msg, "command not found :");
+    if (!err_out)
+        exit(1);
+	temp = ft_strjoin(err_out, cmd);
+    free(err_out);
+    if (!temp)
+        exit(1);
+    err_out = ft_strjoin(temp, "\n");
+	free(temp);
+    if (err_out)
 	{
 		ft_putstr_fd(err_out, STDERR_FILENO);
 		free(err_out);
