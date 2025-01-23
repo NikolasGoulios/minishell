@@ -63,11 +63,9 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
     pid_t   last_pid;
     pid_t   wpid;
     int     status;
-    int     exit_status;
 
     i = 0;
     last_pid = -1;
-	exit_status = 0;
 	while (i < num_cmds)
 	{
 		if (i < num_cmds - 1)
@@ -107,10 +105,7 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
 	{
         wpid = wait(&status);
 		if (wpid == last_pid && WIFEXITED(status))
-        {
-            exit_status = WEXITSTATUS(status);
-            exit(exit_status);
-        }
+            minishell->exit_status = WEXITSTATUS(status); //use this in echo ?$
 		i++;
 	}
 }
