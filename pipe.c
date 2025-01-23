@@ -55,7 +55,7 @@ static void	ft_child_process(int *prev_pipe, int *next_pipe, char *cmd, char **e
 	ft_command(envp, cmd); //execute command
 }
 
-void	ft_pipe(int num_cmds, char **cmds, char **envp)
+void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
 {
 	int		pipe_fd[num_cmds - 1][2];
 	int		i;
@@ -63,7 +63,9 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
     pid_t   last_pid;
     pid_t   wpid;
     int     status;
+    char    **envp;
 
+    envp = ms->envp;
     i = 0;
     last_pid = -1;
 	while (i < num_cmds)
@@ -105,7 +107,7 @@ void	ft_pipe(int num_cmds, char **cmds, char **envp)
 	{
         wpid = wait(&status);
 		if (wpid == last_pid && WIFEXITED(status))
-            minishell->exit_status = WEXITSTATUS(status); //use this in echo ?$
+            ms->exit_status = WEXITSTATUS(status); //use this in echo ?$
 		i++;
 	}
 }
