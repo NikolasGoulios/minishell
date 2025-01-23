@@ -1,6 +1,6 @@
 #include "seela.h"
 
-void    initialize_struct(char **envp);
+void    initialize_struct(char **envp)
 {
     t_minishell minishell;
 

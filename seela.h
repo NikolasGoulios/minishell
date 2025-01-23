@@ -15,6 +15,7 @@ typedef struct s_minishell
 } t_minishell;
 
 void	ft_command(char **envp, char *cmd);
+void    initialize_struct(char **envp);
 void	ft_print_err(char *cmd, int c);
 void	ft_free_array(char **array);
 void    ft_pipe(int num_cmds, char **argv, char **envp);
