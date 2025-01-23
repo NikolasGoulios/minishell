@@ -8,6 +8,12 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
+typedef struct s_minishell
+{
+    int exit_status; // Store the last exit status
+    char **envp;     // Environment variables
+} t_minishell;
+
 void	ft_command(char **envp, char *cmd);
 void	ft_print_err(char *cmd, int c);
 void	ft_free_array(char **array);
