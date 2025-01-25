@@ -34,7 +34,10 @@ void    update_exported(char *arg, t_ms *ms)
     while (ms->exported[i])
     {
         if (ft_strncmp(arg, ms->exported[i], len) == 0)
-            check = 1;
+        {
+            if (ms->exported[i][len] == '\0' || ms->exported[i][len] == '=')
+                check = 1;
+        }
         temp[i] = ft_strdup(ms->exported[i]);
         i++;
     }
@@ -64,8 +67,13 @@ void    add_to_exported(char *arg, t_ms *ms, char *name, int len)
     {
         if (ft_strncmp(ms->exported[i], name, len) == 0)
         {
-            check = 1;
-            temp[i] = ft_strdup(arg);
+            if (ms->envp[i][len] && ms->envp[i][len] == '=')
+            {
+                temp[i] = ft_strdup(arg);
+                check = 1;
+            }
+            else
+                temp[i] = ft_strdup(ms->exported[i]);
         }
         else
             temp[i] = ft_strdup(ms->exported[i]);
@@ -97,8 +105,13 @@ void    add_to_env(char *arg, t_ms *ms, char *name, int len)
     {
         if (ft_strncmp(ms->envp[i], name, len) == 0)
         {
-            temp[i] = ft_strdup(arg);
-            check = 1;
+            if (ms->envp[i][len] && ms->envp[i][len] == '=')
+            {
+                temp[i] = ft_strdup(arg);
+                check = 1;
+            }
+            else
+                temp[i] = ft_strdup(ms->envp[i]);
         }
         else
             temp[i] = ft_strdup(ms->envp[i]);
@@ -116,17 +129,16 @@ void    add_to_env(char *arg, t_ms *ms, char *name, int len)
 
 void    add_to_exported_env(char *arg, t_ms *ms)
 {
-    int     i;
     int     len;
-    char    name[1024];
+    char    *name;
 
-    i = 0;
-    while (arg[i] && arg[i] != '=')
-    {
-        name[i] = arg[i];
-        i++;
-    }
-    len = i;
+    len = 0;
+    while (arg[len] && arg[len] != '=')
+        len++;
+	if (len == 0)
+		return;
+	name = malloc(sizeof(char) * (len + 1));
+	name = ft_strncpy(name, arg, len);
     add_to_exported(arg, ms, name, len);
     add_to_env(arg, ms, name, len);
 }

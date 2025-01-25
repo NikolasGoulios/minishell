@@ -25,7 +25,7 @@ void    handle_export(char **args, t_ms *ms); //EXPORT HANDLING
 void    add_to_exported_env(char *arg, t_ms *ms);
 void    add_to_env(char *arg, t_ms *ms, char *name, int len);
 void    add_to_exported(char *arg, t_ms *ms, char *name, int len);
-void    update_exported(char *arg, t_ms *ms)
+void    update_exported(char *arg, t_ms *ms);
 
 //double_array_handling.c
 char	**copy_map(char **original_map);
