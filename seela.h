@@ -10,10 +10,12 @@
 
 typedef struct s_ms
 {
-    int exit_status; // Store the last exit status
-    char **envp;     // Environment variables
+    int     exit_status; // Store the last exit status
+    char    **envp;     // Environment variables
+    char    **exported;
 } t_ms;
 
+char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
 void    initialize_struct(char **envp);
 void	ft_print_err(char *cmd, int c);
