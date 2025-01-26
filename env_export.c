@@ -7,9 +7,11 @@ export KEY=         = changes KEY's value to empty in exported and envp, creates
 export KEY=VALUE    = changes KEY's value to VALUE in exported and envp, creates it with this value if it don't already exist
 
 and export always prints in alphabetical order, with declare -x before KEY and VALUE is in double quotes ""
+
+KEY contains only alphabets or numbers or _ and the first character cant be a number
 */
 /*
-n env handlind, call handle_envp(t_ms *ms) function with the ms struct
+in env handlind, call handle_envp(t_ms *ms) function with the ms struct
 in export handling, call handle_exported(char **args, t_ms *ms) function
 with args and the ms struct
 args are for example args[0]="export" args[1]="HEY=hi" args[2]=NULL
@@ -26,9 +28,11 @@ void    update_exported(char *arg, t_ms *ms)
     temp = NULL;
     i = 0;
     check = 0;
+	if (arg[0] >= '0' && arg[0] <= '9')
+		return (print_error3(ms, arg));
 	while (arg[i])
 	{
-		if ((ft_isalnum(arg[i]) == 0) || arg[i] != '_')
+		if (!ft_isalnum(arg[i]) && arg[i] != '_')
 			return (print_error3(ms, arg));
 		i++;
 	}
@@ -148,9 +152,14 @@ void    add_to_exported_env(char *arg, t_ms *ms)
 		return;
 	name = malloc(sizeof(char) * (len + 1));
 	name = ft_strncpy(name, arg, len);
+	if (name[0] >= '0' && name[0] <= '9')
+	{
+		free(name);
+		return (print_error3(ms, arg));
+	}
 	while (name[i])
 	{
-		if ((ft_isalnum(name[i]) == 0) || name[i] != '_')
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 		{
 			free(name);
 			return (print_error3(ms, arg));
