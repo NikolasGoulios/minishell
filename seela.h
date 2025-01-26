@@ -37,6 +37,10 @@ char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
 void    print_array(char **m);
 
+//handle_expansion.c
+char	*handle_expansion(char *args, t_ms *ms);
+char	*expand_key(char **envp, char *key, int len);
+
 //initialize_struct.c
 void    initialize_struct(char **envp);
 
