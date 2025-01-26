@@ -141,6 +141,7 @@ void    add_to_exported_env(char *arg, t_ms *ms)
 	name = ft_strncpy(name, arg, len);
     add_to_exported(arg, ms, name, len);
     add_to_env(arg, ms, name, len);
+	free(name);
 }
 
 void    handle_export(char **args, t_ms *ms) /// args are for exapmle args[0]="export" args[1]="HEY=hi" args[2]=NULL
