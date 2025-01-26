@@ -6,6 +6,19 @@ void    handle_env(t_ms *ms)
     print_array(ms->envp);
 }
 
+void	print_error3(t_ms *ms, char *arg)
+{
+	char	*error;
+	char	*temp;
+
+	error = ft_strjoin("bash: export: '", arg);
+	temp = ft_strjoin(error, "': not a valid identifier\n");
+	ms->exit_status = 1;
+	ft_putstr_fd(temp, 2);
+	free(temp);
+	free(error);
+}
+
 void    print_exported(t_ms *ms)
 {
     int     i;

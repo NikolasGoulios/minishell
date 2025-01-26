@@ -26,6 +26,13 @@ void    update_exported(char *arg, t_ms *ms)
     temp = NULL;
     i = 0;
     check = 0;
+	while (arg[i])
+	{
+		if ((ft_isalnum(arg[i]) == 0) || arg[i] != '_')
+			return (print_error3(ms, arg));
+		i++;
+	}
+	i = 0;
     len = (int)ft_strlen(arg);
     while (ms->exported[i])
         i++;
@@ -130,15 +137,26 @@ void    add_to_env(char *arg, t_ms *ms, char *name, int len)
 void    add_to_exported_env(char *arg, t_ms *ms)
 {
     int     len;
+	int		i;
     char    *name;
 
     len = 0;
+	i = 0;
     while (arg[len] && arg[len] != '=')
         len++;
 	if (len == 0)
 		return;
 	name = malloc(sizeof(char) * (len + 1));
 	name = ft_strncpy(name, arg, len);
+	while (name[i])
+	{
+		if ((ft_isalnum(name[i]) == 0) || name[i] != '_')
+		{
+			free(name);
+			return (print_error3(ms, arg));
+		}
+		i++;
+	}
     add_to_exported(arg, ms, name, len);
     add_to_env(arg, ms, name, len);
 	free(name);

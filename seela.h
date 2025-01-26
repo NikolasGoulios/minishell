@@ -19,6 +19,7 @@ typedef struct s_ms
 void    handle_env(t_ms *ms); //ENV HANDLING
 void    print_exported(t_ms *ms);
 void    sort_exported_alphaorder(t_ms *ms);
+void	print_error3(t_ms *ms, char *arg);
 
 //env_export.c
 void    handle_export(char **args, t_ms *ms); //EXPORT HANDLING
