@@ -38,7 +38,7 @@ void	ft_command(char **envp, char *cmd);
 void    print_array(char **m);
 
 //handle_expansion.c
-char	*handle_expansion(char *args, t_ms *ms);
+char	*handle_expansion(char *args, t_ms *ms); //ENVIRONMENTAL EXPANSION HANDLNG
 char	*expand_key(char **envp, char *key, int len);
 
 //initialize_struct.c
