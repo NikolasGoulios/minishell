@@ -27,6 +27,11 @@ void    add_to_env(char *arg, t_ms *ms, char *name, int len);
 void    add_to_exported(char *arg, t_ms *ms, char *name, int len);
 void    update_exported(char *arg, t_ms *ms);
 
+//unset.c
+void	handle_unset(char **args, t_ms *ms); //UNSET HANDLING
+void	rm_from_env(t_ms *ms, char *name, int len);
+void	rm_from_export(t_ms *ms, char *name, int len);
+
 //double_array_handling.c
 char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
