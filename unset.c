@@ -1,9 +1,8 @@
-#include "seela.h"
-
 /*
 unset
 
 works like this unset KEY
+KEY is made of alphabets, numbers and _, number cannot be the first character
 rms the KEY and its value from envp and export
 if you send unset KEY= or unset KEY=VALUE, prnts ut error message and changes exit status accordingly
 
@@ -14,7 +13,9 @@ if one KEY s invalid like "USER=", it will cahnge exit status to 1 but still wou
 and the t_ms *ms is the struct which holds the envp and exported
 */
 
-void	rm_from_export(t_ms *ms, char *name, int len)
+#include "seela.h"
+
+static void	rm_from_export(t_ms *ms, char *name, int len)
 {
 	int		i;
 	int		x;
@@ -42,7 +43,7 @@ void	rm_from_export(t_ms *ms, char *name, int len)
     free(temp);
 }
 
-void	rm_from_env(t_ms *ms, char *name, int len)
+static void	rm_from_env(t_ms *ms, char *name, int len)
 {
 	int		i;
 	int		x;
@@ -83,6 +84,30 @@ static void	print_unset_error(char **args, int i, t_ms *ms)
 	free(err_out);
 }
 
+static int		check_if_valid_key(char *name, char **args, int i, t_ms *ms)
+{
+	int		x;
+
+	x = 0;
+	if (name[0] >= '0' && name[0] <= '9')
+	{
+		free(name);
+		print_unset_error(args, i, ms);
+		return (1);
+	}
+	while (name[x])
+	{
+		if (!ft_isalnum(name[x]) && name[x] != '_')
+		{
+			free(name);
+			print_unset_error(args, i, ms);
+			return (1);
+		}
+		x++;
+	}
+	return (0);
+}
+
 void	handle_unset(char **args, t_ms *ms)
 {
 	int		len;
@@ -104,9 +129,12 @@ void	handle_unset(char **args, t_ms *ms)
 		{
 			name = malloc(sizeof(char) * (len + 1));
 			name = ft_strncpy(name, args[i], len);
-			rm_from_export(ms, name, len);
-			rm_from_env(ms, name, len);
-			free(name);
+			if (check_if_valid_key(name, args, i, ms) == 0)
+			{
+				rm_from_export(ms, name, len);
+				rm_from_env(ms, name, len);
+				free(name);
+			}
 		}
 		i++;
 		len = 0;
