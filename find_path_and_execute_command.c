@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 /*
+ALWAYS CALL FT_PIPE FIRST EVEN WITH SINGLE COMMAND; SO IT FORKS THE PROCESS AND THEN TRIES TO EXECUTE
+
+
 FT_FIND_PATH_2 FUNCTION:
 Purpose: This function tries to find the full path of a command
 by appending the command to each directory in the PATH environment variable.

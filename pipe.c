@@ -32,6 +32,8 @@ In a typical shell pipeline (e.g., cmd1 | cmd2):
 The output of cmd1 is sent to cmd2 through a pipe.
 cmd1 writes its output to the write end of the pipe.
 cmd2 reads from the read end of the pipe.
+
+ALSO WORKS WITH SINGLE COMMAND EXECUTION SO CALL THIS WHENEVER YOU NEED TO EXECUTE!!!
 */
 
 #include "seela.h"
@@ -54,6 +56,27 @@ static void	ft_child_process(int *prev_pipe, int *next_pipe)
 	}
 }
 
+void	ft_execute_single_cmd(char *cmd, t_ms *ms)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		ms->exit_status = 1;
+		return;
+	}
+	if (pid == 0) // Child process
+	{
+		ft_command(ms->envp, cmd); // Execute command
+		exit(127); // Only reached if execve fails
+	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		ms->exit_status = WEXITSTATUS(status);
+}
+
 void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
 {
 	int		pipe_fd[num_cmds - 1][2];
@@ -65,6 +88,11 @@ void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
 
     i = 0;
     last_pid = -1;
+	if (num_cmds == 1) // Handle single command case
+    {
+        ft_execute_single_cmd(cmds[0], &ms);
+        return;
+    }
 	while (i < num_cmds)
 	{
 		if (i < num_cmds - 1)

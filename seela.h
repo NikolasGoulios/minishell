@@ -51,10 +51,10 @@ void	ft_free_array(char **array);
 void    print_array(char **m);
 
 //find_path_and_execute_command.c
-void	ft_command(char **envp, char *cmd); //EXECVE HANDLING
+void	ft_command(char **envp, char *cmd);
 
 //pipe.c
-void    ft_pipe(int num_cmds, char **argv, t_ms *ms); //PIPE HANDLING
+void    ft_pipe(int num_cmds, char **argv, t_ms *ms); //PIPE AND EXECVE HANDLING
 
 //redrections.c
 void	redirection_outfile_emptied(char *file); //< HANDLING
