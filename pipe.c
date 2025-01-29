@@ -36,7 +36,7 @@ cmd2 reads from the read end of the pipe.
 
 #include "seela.h"
 
-static void	ft_child_process(int *prev_pipe, int *next_pipe, char *cmd, char **envp)
+static void	ft_child_process(int *prev_pipe, int *next_pipe)
 {
 	if (prev_pipe)
 	{
@@ -52,7 +52,6 @@ static void	ft_child_process(int *prev_pipe, int *next_pipe, char *cmd, char **e
 		close(next_pipe[0]);
 		close(next_pipe[1]);
 	}
-	ft_command(envp, cmd); //execute command
 }
 
 void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
@@ -63,9 +62,7 @@ void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
     pid_t   last_pid;
     pid_t   wpid;
     int     status;
-    char    **envp;
 
-    envp = ms->envp;
     i = 0;
     last_pid = -1;
 	while (i < num_cmds)
@@ -73,19 +70,26 @@ void	ft_pipe(int num_cmds, char **cmds, t_ms *ms)
 		if (i < num_cmds - 1)
 		{
 			if (pipe(pipe_fd[i]) == -1)
-		        	exit(1);
+			{
+				ms->exit_status = 1;
+		        return;
+			}
 		}
 		pid = fork();
 		if (pid < 0)
-			exit(1);
+		{
+			ms->exit_status = 1;
+			return;
+		}
 		if (pid == 0) // Child process
 		{
 			if (i == 0) // first command
-				ft_child_process(NULL, pipe_fd[i], cmds[i], envp);
+				ft_child_process(NULL, pipe_fd[i]);
 			else if (i == num_cmds - 1) // last command
-				ft_child_process(pipe_fd[i - 1], NULL, cmds[i], envp);
+				ft_child_process(pipe_fd[i - 1], NULL);
 			else //any commands in between
-				ft_child_process(pipe_fd[i - 1], pipe_fd[i], cmds[i], envp);
+				ft_child_process(pipe_fd[i - 1], pipe_fd[i]);
+			ft_command(ms->envp, cmds[i]); //execute command
 		}
 		if (i > 0)
 		{
