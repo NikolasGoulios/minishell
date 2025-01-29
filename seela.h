@@ -54,7 +54,7 @@ void    print_array(char **m);
 void	ft_command(char **envp, char *cmd);
 
 //pipe.c
-void    ft_pipe(int num_cmds, char **argv, t_ms *ms); //PIPE AND EXECVE HANDLING
+void    execute_cmd(int num_cmds, char **argv, t_ms *ms); //PIPE AND EXECVE HANDLING
 
 //redrections.c
 void	redirection_outfile_emptied(char *file); //< HANDLING
