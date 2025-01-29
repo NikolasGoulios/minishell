@@ -102,15 +102,13 @@ static char	*ft_find_path(char **envp, char **cmds)
 static void	ft_check_dir(char *cmd)
 {
 	int		len;
-	char	*err_msg;
 	char	*err_out;
 	char	*err_temp;
 
-	err_msg = "zsh: ";
 	len = ft_strlen(cmd) - 1;
 	if (cmd[0] == '.' && cmd[len] == '/')
 	{
-		err_out = ft_strjoin(err_msg, cmd);
+		err_out = ft_strjoin("zsh: ", cmd);
 		err_temp = ft_strjoin(err_out, ": Is a directory\n");
 		free(err_out);
 		ft_putstr_fd(err_temp, STDERR_FILENO);
