@@ -1,7 +1,7 @@
 /*
 handles $USER, so enviroment variable expansion
 args has all the arrays need to bee expanded
-for example args[0] = "My home directory is $HOME", args[1]="$USER$LOGNAME" args[2]=NULL
+for example args = "My home directory is $HOME" or args="$USER$LOGNAME"
 if the KEY dont exists replace the $HOME with "", else replace $HOME with the VALUE
 
 KEY only contains numbers, alphabets or _ and the first character cant be a number
