@@ -1,5 +1,5 @@
 /*
- prints out pwd path stored in ms->envp
+ prints out pwd
 prnts it out even if pwd 1 etc. many args, bs des this in bash 
 */
 
