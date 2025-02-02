@@ -19,25 +19,15 @@ void	ft_print_err(char *cmd, int c)
 	char	*err_out;
 	char	*temp;
 
-	err_msg = "zsh: ";
-    err_out = NULL;
+	ft_putstr_fd("zsh: ", 2);
 	if (cmd[0] == '/' || c == 2)
-		err_out = ft_strjoin(err_msg, "No such file or directory: ");
+		ft_putstr_fd("No such file or directory: ", 2);
 	else if (cmd[0] == '.')
-		err_out = ft_strjoin(err_msg, "Permission denied: ");
+		ft_putstr_fd("Permission denied: ", 2);
 	else
-		err_out = ft_strjoin(err_msg, "command not found: ");
+		ft_putstr_fd("command not found: ", 2);
     if (!err_out)
         exit(1);
-	temp = ft_strjoin(err_out, cmd);
-    free(err_out);
-    if (!temp)
-        exit(1);
-    err_out = ft_strjoin(temp, "\n");
-	free(temp);
-    if (err_out)
-	{
-		ft_putstr_fd(err_out, STDERR_FILENO);
-		free(err_out);
-	}
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd("\n", 2);
 }
