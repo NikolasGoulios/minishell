@@ -102,7 +102,9 @@ void	handle_cd(t_ms *ms, char **args)
 		return;
 	if (chdir(target_dir) == -1)
 	{
-		perror("cd");
+		ft_putstr_fd("bash: cd: ", 2);
+		ft_putstr_fd(target_dir, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
 		ms->exit_status = 1;
 		return;
 	}
