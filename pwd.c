@@ -1,5 +1,8 @@
 /*
- prints out pwd
+prints the current working directory.
+Handles the pwd command by printing the current directory.
+Uses getcwd() to get the actual path and displays it.
+Prints an error if getcwd() fails.
 prnts it out even if pwd 1 etc. many args, bs des this in bash 
 */
 
