@@ -6,14 +6,13 @@ prnts it out even if pwd 1 etc. many args, bs des this in bash
 
 #include "seela.h"
 
-char *get_env_value(char *key, char **envp)
+char	*get_env_value(char *key, char **envp)
 {
     int		i;
     size_t	len;
 
 	i = 0;
 	len = ft_strlen(key);
-
     while (envp[i])
     {
         if (ft_strncmp(envp[i], key, len) == 0 && envp[i][len] == '=')
@@ -25,16 +24,17 @@ char *get_env_value(char *key, char **envp)
 
 void	check_pwd(t_ms *ms, char **array)
 {
-	char	*pwd;
+	char	cwd[1024];
 
+	(void)ms; // `ms` is unused here
 	if (!array || !*array)
 		return;
 	if (ft_strcmp(array[0], "pwd") != 0)
 		return;
-	pwd = get_env_value("PWD", ms->envp);
-	if (pwd)
-		printf("%s\n", pwd);
-	else
-		perror("pwd"); // Fallback if PWD isn't set
-}
 
+	// Use getcwd() to get the actual directory
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+		perror("pwd: getcwd failed");
+}
