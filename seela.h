@@ -38,6 +38,9 @@ char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
 void    print_array(char **m);
 
+//pwd.c
+void	check_pwd(t_ms *ms, char **array);
+
 //exit.c
 void	check_exit(char	**array); //HANDLES EXITING
 
