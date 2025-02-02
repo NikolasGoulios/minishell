@@ -1,10 +1,14 @@
 /*
  can change later but now just takes an array like array0] = "exit", array[1] = 1, array[2] = NULL
- if just exit then exit with 127 like in bash
- if exit 15 , exut with 15
- if exit 1 15, print out error messsage like in bash and doesnt exit
- if exit 1x prints out error message like in bash and doesnt exit
- if exit is higher thjan 255 it exits with %modulo 256, like in bash
+
+Handles the exit command, including support for:
+No argument (defaults to exit 127). (exit)
+Valid numeric argument (exits with that code). (exit 1)
+if exit is bigger than 255, exits with %module 256
+for example exit 300 would exit with 44
+
+Too many arguments (prints an error). (exit 1 1)
+Non-numeric argument (prints an error). (exit 1x)
 */
 
 /*
