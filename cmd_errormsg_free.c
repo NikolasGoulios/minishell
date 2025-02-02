@@ -15,10 +15,6 @@ void	ft_free_array(char **array)
 
 void	ft_print_err(char *cmd, int c)
 {
-	char	*err_msg;
-	char	*err_out;
-	char	*temp;
-
 	ft_putstr_fd("zsh: ", 2);
 	if (cmd[0] == '/' || c == 2)
 		ft_putstr_fd("No such file or directory: ", 2);
