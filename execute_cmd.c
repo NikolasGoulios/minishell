@@ -79,7 +79,7 @@ void	execute_cmd(int num_cmds, char **cmds, t_ms *ms)
     last_pid = -1;
 	if (num_cmds == 1) // Handle single command case
     {
-        execute_single_cmd(cmds[0], &ms);
+        execute_single_cmd(cmds[0], ms);
         return;
     }
 	while (i < num_cmds)
