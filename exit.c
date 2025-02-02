@@ -1,0 +1,57 @@
+/*
+ can change later but now just takes an array like array0] = "exit", array[1] = 1, array[2] = NULL
+ if just exit then exit with 127 like in bash
+ if exit 15 , exut with 15
+ if exit 1 15, print out error messsage like in bash and doesnt exit
+ if exit 1x prints out error message like in bash and doesnt exit
+ if exit is higher thjan 255 it exits with %modulo 256, like in bash
+*/
+
+/*
+ SHOULD ADD THIS ,SYNTAX ERROR THINGS
+ if
+ exit (1)
+ The error bash: syntax error near unexpected token '1' happens because of the wrong syntax.
+ */
+
+#include "seela.h"
+
+void	exit_shell(char *array)
+{
+	int	exit_nbr;
+	
+	exit_nbr = (ft_atoi(array));
+	if (exit_nbr > 255)
+		exit(exit_nbr % 256);
+	exit(exit_nbr);
+}
+
+void	check_exit(char	**array)
+{
+	int		i;
+
+	i = 0;
+	if (!array || !*array)
+		return;
+	if (ft_strcmp(array[0], "exit") != 0)
+		return;
+	if (array[1])
+	{
+		if (array[2])
+		{
+			ft_putstr_fd("bash: exit: too many arguments\n", 2);
+			return;
+		}
+		while (array[1][i])
+		{
+			if (ft_isdigit(array[1][i]) != 1)
+			{
+				ft_putstr_fd("bash: exit: numeric argument required\n", 2);
+				return;
+			}
+			i++;
+		}
+		exit_shell(array[1]);
+	}
+	exit(127);
+}

@@ -38,6 +38,9 @@ char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
 void    print_array(char **m);
 
+//exit.c
+void	check_exit(char	**array); //HANDLES EXITING
+
 //handle_expansion.c
 char	*handle_expansion(char *args, t_ms *ms); //ENVIRONMENTAL EXPANSION HANDLNG
 char	*expand_key(char **envp, char *key, int len);
