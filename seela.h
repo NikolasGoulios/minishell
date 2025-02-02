@@ -38,8 +38,12 @@ char	**copy_map(char **original_map);
 void	ft_command(char **envp, char *cmd);
 void    print_array(char **m);
 
+//cd.c
+void	handle_cd(t_ms *ms, char **args); //CD HANDLING
+
 //pwd.c
 void	check_pwd(t_ms *ms, char **array);
+char	*get_env_value(char *key, char **envp);
 
 //exit.c
 void	check_exit(char	**array); //HANDLES EXITING
